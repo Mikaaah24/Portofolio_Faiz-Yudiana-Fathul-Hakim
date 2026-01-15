@@ -4,262 +4,787 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portofolio | Faiz Yudiana Fathul Hakim</title>
+  <meta name="description" content="Portofolio mekatronika: embedded, IoT, control, dan automation." />
+
   <style>
     :root{
-      --bg:#0b1220; --card:#111a2e; --text:#e8eefc; --muted:#b9c3dd;
-      --accent:#6aa6ff; --line:rgba(255,255,255,.08);
+      --bg:#070A12;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.10);
+      --line: rgba(255,255,255,.10);
+      --text:#EEF2FF;
+      --muted: rgba(238,242,255,.72);
+
+      --a:#8B5CF6; /* violet */
+      --b:#22D3EE; /* cyan */
+      --c:#F472B6; /* pink */
+
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --r: 18px;
+      --r2: 22px;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
-      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: radial-gradient(1200px 800px at 10% 10%, rgba(106,166,255,.18), transparent 60%),
-                  radial-gradient(1000px 700px at 90% 20%, rgba(122,255,205,.12), transparent 55%),
-                  var(--bg);
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
+      background:
+        radial-gradient(900px 600px at 12% 10%, rgba(139,92,246,.22), transparent 60%),
+        radial-gradient(900px 600px at 90% 15%, rgba(34,211,238,.16), transparent 60%),
+        radial-gradient(900px 600px at 60% 105%, rgba(244,114,182,.10), transparent 55%),
+        linear-gradient(180deg, #05060C, var(--bg));
+      min-height:100vh;
     }
-    a{color:inherit; text-decoration:none}
-    .container{max-width:1050px; margin:0 auto; padding:28px 18px 60px}
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:1120px; margin:0 auto; padding: 18px 18px 70px; }
+
+    /* NAV */
     .nav{
-      display:flex; gap:16px; align-items:center; justify-content:space-between;
-      position:sticky; top:0; backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.55);
-      border-bottom:1px solid var(--line);
-      padding:14px 18px; z-index:10;
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(7,10,18,.55);
+      border-bottom: 1px solid var(--line);
     }
-    .brand{font-weight:700; letter-spacing:.2px}
-    .links{display:flex; gap:14px; flex-wrap:wrap}
-    .links a{color:var(--muted); font-size:14px}
-    .links a:hover{color:var(--text)}
-    .hero{padding:34px 0 22px; display:grid; grid-template-columns:1.2fr .8fr; gap:18px}
+    .nav-in{
+      max-width:1120px; margin:0 auto; padding: 12px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 900; letter-spacing: -.4px;
+      white-space: nowrap;
+    }
+    .spark{
+      width:12px; height:12px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, var(--b), var(--a));
+      box-shadow: 0 0 24px rgba(139,92,246,.35);
+    }
+    .links{ display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+    .links a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: .15s ease;
+    }
+    .links a:hover{
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .links a.active{
+      color: var(--text);
+      border-color: rgba(139,92,246,.35);
+      background: rgba(139,92,246,.12);
+    }
+
+    /* CARD */
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      border-radius: var(--r2);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
     }
-    h1{margin:0 0 8px; font-size:34px; line-height:1.1}
-    .subtitle{color:var(--muted); margin:0 0 16px; line-height:1.6}
-    .badges{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0}
-    .badge{
-      border:1px solid var(--line);
-      color:var(--muted);
-      padding:7px 10px; border-radius:999px; font-size:12px;
-      background: rgba(255,255,255,.02);
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 260px at 15% 0%, rgba(34,211,238,.14), transparent 60%);
+      opacity: .9;
+      pointer-events:none;
     }
-    .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .pad{ padding: 18px; position: relative; z-index: 1; }
+
+    /* HERO GRID */
+    .grid-hero{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .hero-top{ display:flex; align-items:center; gap:16px; }
+
+    .avatar{
+      width: 92px; height: 92px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      object-fit: cover;
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      flex: 0 0 auto;
+    }
+    .fallback{
+      width:92px; height:92px; border-radius:999px;
+      display:none; align-items:center; justify-content:center;
+      font-weight:900; letter-spacing:-1px;
+      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), rgba(139,92,246,.14));
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    h1{ margin:0; font-size: 34px; line-height:1.08; letter-spacing:-.9px; }
+    .subtitle{ margin-top:6px; color: var(--muted); line-height:1.65; font-size:14px; }
+
+    .btns{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
     .btn{
       display:inline-flex; align-items:center; gap:8px;
-      border-radius:12px; padding:10px 12px; font-weight:600; font-size:14px;
-      border:1px solid var(--line);
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
       background: rgba(255,255,255,.03);
+      font-weight: 900;
+      font-size: 13px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
     }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(34,211,238,.28); }
     .btn.primary{
-      border-color: rgba(106,166,255,.55);
-      background: rgba(106,166,255,.14);
+      border-color: rgba(139,92,246,.55);
+      background: linear-gradient(90deg, rgba(139,92,246,.18), rgba(34,211,238,.10));
     }
-    .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-top:16px}
-    .section{margin-top:26px}
-    .section h2{margin:0 0 10px; font-size:20px}
-    .muted{color:var(--muted)}
-    .proj{
-      display:flex; flex-direction:column; gap:10px;
-      padding:16px; border-radius:16px;
-      border:1px solid var(--line);
+    .btn.primary:hover{ border-color: rgba(139,92,246,.85); }
+
+    .badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .badge{
+      font-size: 12px; padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+    }
+
+    /* FOCUS BAR */
+    .focus{
+      margin-top:14px;
+      padding: 14px;
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
     }
-    .proj h3{margin:0; font-size:16px}
-    .proj p{margin:0; color:var(--muted); line-height:1.55; font-size:14px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .focus-head{ display:flex; justify-content:space-between; gap:10px; align-items:flex-end; }
+    .focus-title{ font-weight:950; letter-spacing:-.3px; }
+    .bar{
+      margin-top:10px;
+      height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      display:flex;
+    }
+    .seg{
+      height:100%;
+      display:flex; align-items:center; justify-content:center;
+      font-size: 11px; font-weight: 950;
+      color: rgba(255,255,255,.92);
+      white-space: nowrap;
+    }
+    .seg.mech{
+      width: 80%;
+      background: linear-gradient(90deg, rgba(34,211,238,.55), rgba(34,211,238,.20));
+    }
+    .seg.ai{
+      width: 20%;
+      background: linear-gradient(90deg, rgba(139,92,246,.55), rgba(244,114,182,.18));
+      color: rgba(255,255,255,.85);
+    }
+
+    /* RIGHT HERO */
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .stat{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 12px;
+    }
+    .stat .num{
+      font-size: 22px;
+      font-weight: 1000;
+      letter-spacing: -0.6px;
+      background: linear-gradient(90deg, var(--b), var(--a));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+    }
+    .stat .lab{ color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+    /* SECTIONS */
+    .section{ margin-top: 34px; }
+    .section h2{ margin:0 0 10px; font-size:22px; letter-spacing:-.4px; }
+
+    /* STACK */
+    .stack{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .stack-col{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 14px;
+    }
+    .stack-col h3{ margin:0 0 10px; font-size: 14px; letter-spacing:-.2px; }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
     .chip{
-      font-size:12px; padding:6px 8px; border-radius:999px;
-      border:1px solid var(--line); color:var(--muted);
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+    }
+
+    /* PROJECTS */
+    .projects{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .proj{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      cursor: pointer;
+    }
+    .proj:hover{
+      transform: translateY(-4px);
+      border-color: rgba(34,211,238,.25);
+      background: rgba(255,255,255,.05);
+    }
+    .thumb{
+      width:100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: rgba(255,255,255,.02);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:block;
+    }
+    .proj-b{ padding: 14px; }
+    .proj-b h3{ margin:0 0 6px; font-size: 15px; letter-spacing:-.2px; }
+    .proj-b p{ margin:0; color: var(--muted); font-size: 13px; line-height:1.6; }
+    .proj-tags{ margin-top: 10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .tag{
+      font-size: 11px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+    }
+
+    /* CERTS */
+    .certs{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .cert{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 14px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .cert:hover{
+      transform: translateY(-3px);
+      border-color: rgba(139,92,246,.28);
+      background: rgba(255,255,255,.05);
+    }
+    .cert h3{ margin:0 0 6px; font-size: 14px; letter-spacing:-.2px; }
+    .cert p{ margin:0; color: var(--muted); font-size: 13px; line-height:1.6; }
+    .mini{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+
+    /* MODAL */
+    dialog{
+      width: min(780px, calc(100% - 24px));
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      background: rgba(7,10,18,.92);
+      color: var(--text);
+      box-shadow: 0 30px 120px rgba(0,0,0,.6);
+      padding: 0;
+    }
+    dialog::backdrop{
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+    }
+    .modal-h{
+      padding: 16px 16px 0;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .modal-h h3{ margin:0; letter-spacing:-.2px; }
+    .x{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight:900;
+    }
+    .modal-c{ padding: 0 16px 16px; color: var(--muted); line-height:1.75; font-size: 13px; }
+    .modal-img{
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      margin-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      border-bottom: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.02);
     }
-    .two{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-    ul{margin:10px 0 0 18px; color:var(--muted); line-height:1.8}
-    .footer{margin-top:40px; color:var(--muted); font-size:13px; text-align:center}
-    @media (max-width: 860px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .two{grid-template-columns:1fr}
+    .k{ color: var(--text); font-weight: 950; }
+
+    /* FOOTER */
+    .footer{
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align:center;
+      opacity: .95;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .grid-hero{ grid-template-columns: 1fr; }
+      .projects{ grid-template-columns: 1fr; }
+      .certs{ grid-template-columns: 1fr; }
+      .stack{ grid-template-columns: 1fr; }
+      h1{ font-size: 30px; }
+      .avatar{ width: 80px; height: 80px; }
+      .fallback{ width: 80px; height: 80px; }
     }
   </style>
 </head>
+
 <body>
-
-  <div class="nav">
-    <div class="brand">Faiz Yudiana Fathul Hakim • Mekatronika</div>
-    <div class="links">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
+  <header class="nav">
+    <div class="nav-in">
+      <div class="brand"><span class="spark"></span> FAIZ YUDIANA</div>
+      <nav class="links" aria-label="Navigasi">
+        <a href="#profil">Profil</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#tech">Tech Stack</a>
+        <a href="#proyek">Proyek</a>
+        <a href="#sertifikat">Sertifikat</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <div class="container">
-    <section class="hero" id="home">
+  <main class="wrap">
+    <!-- PROFIL -->
+    <section id="profil" class="grid-hero">
       <div class="card">
-        <h1>Faiz Yudiana Fathul Hakim</h1>
-        <p class="subtitle">
-          Mechatronics & Artificial Intelligence Student (Semester 5)<br/>
-          Fokus: IoT, Embedded Systems, Sensor–Actuator Integration, dan Control
-        </p>
+        <div class="pad">
+          <div class="subtitle" style="margin:0; font-weight:900; letter-spacing:-.2px; color: rgba(238,242,255,.82);">
+            Looking for internship • Robotika / Embedded / Otomasi
+          </div>
 
-        <p class="muted" style="margin:0">
-          Saya mengembangkan sistem mekatronika end-to-end: integrasi hardware–software, komunikasi HTTP/MQTT,
-          dan pengujian sistem. Pernah membangun sistem kontrol inkubator telur berbasis ESP32 dengan monitoring real-time
-          dan dashboard web.
-        </p>
+          <div style="height:14px"></div>
 
-        <div class="btns">
-          <a class="btn primary" href="[LINK_CV_PDF]" target="_blank" rel="noreferrer">⬇️ Download CV</a>
-          <a class="btn" href="#projects">📌 Lihat Projects</a>
-          <a class="btn" href="https://github.com/Mikaaah24" target="_blank" rel="noreferrer">💻 GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/faiz-yudiana/" target="_blank" rel="noreferrer">🔗 LinkedIn</a>
-        </div>
+          <div class="hero-top">
+            <img class="avatar" src="assets/foto-faiz.jpg" alt="Foto Faiz"
+                 onerror="this.style.display='none'; document.getElementById('fb').style.display='flex';" />
+            <div id="fb" class="fallback">FY</div>
 
-        <div class="badges">
-          <span class="badge">ESP32 / Arduino</span>
-          <span class="badge">MQTT / HTTP</span>
-          <span class="badge">Sensor–Actuator</span>
-          <span class="badge">PLC (Omron CX-Programmer)</span>
-          <span class="badge">Computer Vision (OpenCV)</span>
+            <div>
+              <h1>Faiz Yudiana<br/>Fathul Hakim</h1>
+              <div class="subtitle">
+                Mechatronics & Artificial Intelligence • UPI (Semester 5)<br/>
+                Fokus: Embedded • IoT • Control • Automation
+              </div>
+            </div>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <p class="subtitle" style="margin:0;">
+            Saya mahasiswa semester 5 yang fokus mengembangkan sistem mekatronika end-to-end:
+            integrasi sensor–aktuator, komunikasi HTTP/MQTT, serta pengujian & dokumentasi sistem.
+            Saya pernah membangun sistem otomasi berbasis ESP32 dengan monitoring real-time dan dashboard web.
+          </p>
+
+          <div class="btns">
+            <a class="btn primary" href="[LINK_CV_PDF]" target="_blank" rel="noreferrer">⬇️ CV</a>
+            <a class="btn" href="#proyek">🚀 Proyek</a>
+            <a class="btn" href="https://github.com/Mikaaah24" target="_blank" rel="noreferrer">💻 GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/faiz-yudiana/" target="_blank" rel="noreferrer">🔗 LinkedIn</a>
+          </div>
+
+          <div class="badges">
+            <span class="badge">ESP32 / Arduino</span>
+            <span class="badge">Sensor–Actuator</span>
+            <span class="badge">HTTP / MQTT</span>
+            <span class="badge">PLC (Omron)</span>
+            <span class="badge">OpenCV (basic)</span>
+          </div>
+
+          <div class="focus">
+            <div class="focus-head">
+              <div class="focus-title">Fokus Portofolio</div>
+            </div>
+            <div class="bar" title="Mekatronika 80% | AI 20%">
+              <div class="seg mech">Mekatronika 80%</div>
+              <div class="seg ai">AI 20%</div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="card">
-        <h2>Highlight (Mekatronika)</h2>
-        <ul>
-          <li>Embedded & IoT: ESP32/Arduino, PWM, integrasi sensor/aktuator</li>
-          <li>Komunikasi: MQTT (basic), HTTP</li>
-          <li>Otomasi industri: ladder logic Omron, trainer pneumatic/hydraulic</li>
-          <li>Dokumentasi & system thinking: blok diagram, wiring, uji fungsi & keselamatan</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <h2>Projects (Selected)</h2>
-      <p class="muted">Bagian ini fokus ke mekatronika & embedded. Link demo/repo bisa kamu isi belakangan.</p>
-
-      <div class="grid">
-        <div class="proj">
-          <h3>Bank Energy (Off-grid Solar Charging Station) — PKM</h3>
-          <p>Rancang arsitektur sistem penyimpanan & distribusi energi off-grid untuk lampu dan charging outlet.</p>
-          <div class="chips">
-            <span class="chip">Solar Panel</span><span class="chip">MPPT</span><span class="chip">Lead-acid</span><span class="chip">Inverter</span>
+        <div class="pad">
+          <h2 style="margin:0 0 10px;">Ringkasan</h2>
+          <div class="subtitle" style="margin:0;">
+            IoT & Embedded Systems • Integrasi Sensor–Aktuator • Control Logic • Otomasi Industri (PLC)
           </div>
-          <p class="muted">
-            Scope: wiring & integrasi komponen, pengecekan polaritas, serta uji fungsi dan keselamatan.
-          </p>
-          <p>
-            <a class="btn" href="[LINK_DEMO_BANK_ENERGY]" target="_blank" rel="noreferrer">📷 Foto/Video</a>
-            <a class="btn" href="[LINK_DOC_BANK_ENERGY]" target="_blank" rel="noreferrer">📄 Laporan</a>
-          </p>
-        </div>
 
-        <div class="proj">
-          <h3>Firefighting Line Follower Robot — CV & IoT</h3>
-          <p>Modul deteksi api berbasis kamera (OpenCV) + komunikasi MQTT ke robot line follower pemadam.</p>
-          <div class="chips">
-            <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">MQTT</span><span class="chip">ESP32</span><span class="chip">TCRT</span>
+          <div class="stats">
+            <div class="stat">
+              <div class="num" data-count="3">0</div>
+              <div class="lab">Featured projects</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="6">0</div>
+              <div class="lab">Kategori skill</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="1">0</div>
+              <div class="lab">Sertifikat</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="2026">0</div>
+              <div class="lab">Updated</div>
+            </div>
           </div>
-          <p class="muted">
-            Scope: desain alur MQTT, logika kontrol robot, wiring awal & block diagram integrasi.
-          </p>
-          <p>
-            <a class="btn" href="[LINK_DEMO_FIREFIGHT]" target="_blank" rel="noreferrer">🎥 Demo</a>
-            <a class="btn" href="[LINK_GITHUB_FIREFIGHT]" target="_blank" rel="noreferrer">📁 Repo</a>
-          </p>
-        </div>
-
-        <div class="proj">
-          <h3>Industrial Automation Practice — Engineer Trainee</h3>
-          <p>Latihan otomasi industri: ladder logic, HMI, serta skenario kontrol pneumatic & hydraulic.</p>
-          <div class="chips">
-            <span class="chip">Omron CX-Programmer</span><span class="chip">Ladder</span><span class="chip">Pneumatic</span><span class="chip">Hydraulic</span>
-          </div>
-          <p class="muted">
-            Case: water tank control, automatic conveyor, simulasi lift 4 lantai, emergency stop, timed transitions.
-          </p>
-          <p>
-            <a class="btn" href="[LINK_DOC_PLC]" target="_blank" rel="noreferrer">📄 Dokumentasi</a>
-            <a class="btn" href="[LINK_VIDEO_PLC]" target="_blank" rel="noreferrer">🎥 Demo</a>
-          </p>
-        </div>
-      </div>
-
-      <div style="margin-top:14px" class="card">
-        <h3 style="margin:0 0 8px">Project Lain (Opsional)</h3>
-        <p class="muted" style="margin:0">
-          Kamu juga punya experience Data/AI: analisis dataset BPJS 2022 + model regresi untuk prediksi time lag.
-          Ini bisa kamu taruh di section “AI Projects” kalau mau, tapi untuk portofolio mekatronika cukup jadi tambahan.
-        </p>
-        <div class="btns" style="margin-top:12px">
-          <a class="btn" href="[LINK_GITHUB_BPJS]" target="_blank" rel="noreferrer">📁 Repo BPJS (opsional)</a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="skills">
-      <h2>Skills</h2>
-      <div class="two">
-        <div class="card">
-          <h3>Technical</h3>
-          <ul>
-            <li><b>Embedded & IoT:</b> ESP32, Arduino (UNO/Nano), sensor/actuator, PWM</li>
-            <li><b>Communication:</b> HTTP, MQTT (basic)</li>
-            <li><b>Automation & PLC:</b> Omron CX-Programmer, ladder logic (basic), relay control</li>
-            <li><b>Data Tools:</b> Python, Pandas, NumPy, Matplotlib</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Prototyping & Tools</h3>
-          <ul>
-            <li>Prototyping: breadboarding, soldering, Fritzing, Eagle PCB design</li>
-            <li>Simulasi/Desain: Proteus, Tinkercad, Autocad, SketchUp</li>
-            <li>Dev tools: VS Code, Git/GitHub</li>
-            <li>Dokumentasi: technical reporting (Word/Excel)</li>
-          </ul>
+    <!-- TENTANG -->
+    <section id="tentang" class="section">
+      <h2>Tentang</h2>
+      <div class="card">
+        <div class="pad">
+          <div class="subtitle" style="margin:0;">
+            Saya mahasiswa semester 5 Mechatronics & Artificial Intelligence yang fokus di <b>IoT</b> dan <b>embedded systems</b>.
+            Saya memiliki pengalaman membangun sistem otomasi berbasis <b>ESP32</b> (monitoring sensor real-time + dashboard web),
+            terbiasa dengan <b>integrasi sensor–aktuator</b>, komunikasi <b>HTTP/MQTT</b>, serta pendekatan <b>hardware–software co-design</b>.
+            Saya juga memiliki exposure otomasi industri menggunakan <b>Omron PLC (CX-Programmer)</b> melalui latihan sistem
+            pneumatic & hydraulic, serta terbiasa dengan dokumentasi teknis dan pengujian sistem.
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="stack">
+            <div class="stack-col">
+              <h3>Fokus Utama</h3>
+              <div class="chips">
+                <span class="chip">IoT & Embedded Systems</span>
+                <span class="chip">Sensor–Actuator Integration</span>
+                <span class="chip">HTTP / MQTT</span>
+                <span class="chip">Automation Systems</span>
+              </div>
+            </div>
+
+            <div class="stack-col">
+              <h3>Cara Kerja</h3>
+              <div class="chips">
+                <span class="chip">Block Diagram</span>
+                <span class="chip">Wiring & Safety Check</span>
+                <span class="chip">Testing & Logging</span>
+                <span class="chip">Iterasi & Debugging</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- TECH STACK -->
+    <section id="tech" class="section">
+      <h2>Tech Stack</h2>
+      <div class="card">
+        <div class="pad">
+          <div class="stack">
+            <div class="stack-col">
+              <h3>Embedded & IoT</h3>
+              <div class="chips">
+                <span class="chip">ESP32</span>
+                <span class="chip">Arduino (UNO / Nano)</span>
+                <span class="chip">Sensor/Actuator Integration</span>
+                <span class="chip">PWM</span>
+                <span class="chip">HTTP</span>
+                <span class="chip">MQTT (basic)</span>
+              </div>
+            </div>
+
+            <div class="stack-col">
+              <h3>Automation & PLC</h3>
+              <div class="chips">
+                <span class="chip">Omron CX-Programmer</span>
+                <span class="chip">Ladder Logic (basic)</span>
+                <span class="chip">Relay-based Control</span>
+                <span class="chip">Pneumatic Trainer</span>
+                <span class="chip">Hydraulic Trainer</span>
+              </div>
+            </div>
+
+            <div class="stack-col">
+              <h3>Data & Vision</h3>
+              <div class="chips">
+                <span class="chip">Python</span>
+                <span class="chip">Pandas</span>
+                <span class="chip">NumPy</span>
+                <span class="chip">Matplotlib</span>
+                <span class="chip">OpenCV (basic)</span>
+              </div>
+            </div>
+
+            <div class="stack-col">
+              <h3>Prototyping & Electronics</h3>
+              <div class="chips">
+                <span class="chip">Breadboarding</span>
+                <span class="chip">Soldering</span>
+                <span class="chip">Fritzing</span>
+                <span class="chip">Eagle PCB Design</span>
+              </div>
+            </div>
+
+            <div class="stack-col">
+              <h3>Simulation & Design</h3>
+              <div class="chips">
+                <span class="chip">Proteus</span>
+                <span class="chip">Tinkercad</span>
+                <span class="chip">AutoCAD</span>
+                <span class="chip">SketchUp</span>
+              </div>
+            </div>
+
+            <div class="stack-col">
+              <h3>Dev & Documentation</h3>
+              <div class="chips">
+                <span class="chip">VS Code</span>
+                <span class="chip">Git / GitHub</span>
+                <span class="chip">Microsoft Word</span>
+                <span class="chip">Microsoft Excel</span>
+                <span class="chip">Technical Reporting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYEK -->
+    <section id="proyek" class="section">
+      <h2>Proyek</h2>
+
+      <div class="projects">
+        <article class="proj" data-modal="m1">
+          <img class="thumb" src="assets/bank-energy.jpg" alt="Bank Energy" onerror="this.style.display='none'">
+          <div class="proj-b">
+            <h3>Bank Energy — Off-grid Solar Charging Station</h3>
+            <p>Sistem penyimpanan & distribusi energi off-grid untuk lampu dan charging outlet.</p>
+            <div class="proj-tags">
+              <span class="tag">Solar</span><span class="tag">Power</span><span class="tag">Safety</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj" data-modal="m2">
+          <img class="thumb" src="assets/firefighting.jpg" alt="Firefighting Robot" onerror="this.style.display='none'">
+          <div class="proj-b">
+            <h3>Firefighting Line Follower Robot</h3>
+            <p>Robot line follower untuk misi pemadaman; integrasi sensor dan kontrol.</p>
+            <div class="proj-tags">
+              <span class="tag">Robot</span><span class="tag">Control</span><span class="tag">Sensors</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj" data-modal="m3">
+          <img class="thumb" src="assets/plc.jpg" alt="PLC Practice" onerror="this.style.display='none'">
+          <div class="proj-b">
+            <h3>Industrial Automation Practice — PLC</h3>
+            <p>Latihan ladder logic & kontrol sistem industrial (conveyor, lift, tank control, E-stop).</p>
+            <div class="proj-tags">
+              <span class="tag">PLC</span><span class="tag">Ladder</span><span class="tag">Safety</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SERTIFIKAT -->
+    <section id="sertifikat" class="section">
+      <h2>Sertifikat</h2>
+      <div class="certs">
+        <div class="cert">
+          <h3>Introduction to Cloud</h3>
+          <p>Cognitive Class / IBM Developer Skills Network</p>
+          <div class="mini">
+            <span class="tag">Cloud</span><span class="tag">IBM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
     <section class="section" id="education">
       <h2>Education</h2>
       <div class="card">
-        <p class="subtitle" style="margin:0">
-          Universitas Pendidikan Indonesia (UPI) — Purwakarta (Sep 2023 – Present)<br/>
-          Undergraduate Student in Mechatronics & Artificial Intelligence • GPA 3.54/4.00
-        </p>
-        <p class="muted" style="margin-top:10px">
-          Relevant coursework: Embedded Systems, Control Systems, PLC Programming, Electronics, IoT, Computer Vision, Machine Learning
-        </p>
+        <div class="pad">
+          <div class="subtitle" style="margin:0;">
+            <b>Universitas Pendidikan Indonesia (UPI) — Purwakarta</b><br/>
+            Mechatronics & Artificial Intelligence • Sep 2023 – Present • GPA 3.54/4.00
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <h2>Contact</h2>
+    <!-- KONTAK -->
+    <section id="kontak" class="section">
+      <h2>Kontak</h2>
       <div class="card">
-        <p class="subtitle" style="margin:0">
-          Phone/WA: <b>081221338165</b><br/>
-          Email: <b>yudianafathul@gmail.com</b><br/>
-          GitHub: <b>github.com/Mikaaah24</b><br/>
-          LinkedIn: <b>linkedin.com/in/faiz-yudiana</b>
-        </p>
-        <p class="muted" style="margin-top:10px">
-          Sertifikasi: Introduction to Cloud — Cognitive Class / IBM Developer Skills Network
-        </p>
+        <div class="pad">
+          <div class="subtitle" style="margin:0; line-height:1.9;">
+            Phone/WA: <b>081221338165</b><br/>
+            Email: <b>yudianafathul@gmail.com</b><br/>
+            GitHub: <b>github.com/Mikaaah24</b><br/>
+            LinkedIn: <b>linkedin.com/in/faiz-yudiana</b>
+          </div>
+
+          <div class="btns">
+            <a class="btn primary" href="mailto:yudianafathul@gmail.com">✉️ Email</a>
+            <a class="btn" href="https://wa.me/6281221338165" target="_blank" rel="noreferrer">💬 WhatsApp</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="footer">© <span id="year"></span> Faiz Yudiana Fathul Hakim • Built with simple HTML/CSS</div>
-  </div>
+    <footer class="footer">
+      © <span id="year"></span> Faiz Yudiana Fathul Hakim
+    </footer>
+  </main>
+
+  <!-- MODALS -->
+  <dialog id="m1">
+    <div class="modal-h">
+      <h3>Bank Energy — Off-grid Solar Charging Station</h3>
+      <button class="x" data-close>✕</button>
+    </div>
+    <img class="modal-img" src="assets/bank-energy.jpg" alt="Bank Energy" onerror="this.style.display='none'">
+    <div class="modal-c">
+      <div><span class="k">Ringkas:</span> sistem energi off-grid untuk lampu + charging outlet.</div>
+    </div>
+  </dialog>
+
+  <dialog id="m2">
+    <div class="modal-h">
+      <h3>Firefighting Line Follower Robot</h3>
+      <button class="x" data-close>✕</button>
+    </div>
+    <img class="modal-img" src="assets/firefighting.jpg" alt="Firefighting Robot" onerror="this.style.display='none'">
+    <div class="modal-c">
+      <div><span class="k">Ringkas:</span> robot line follower untuk misi pemadaman, integrasi sensor dan kontrol.</div>
+    </div>
+  </dialog>
+
+  <dialog id="m3">
+    <div class="modal-h">
+      <h3>Industrial Automation Practice — PLC</h3>
+      <button class="x" data-close>✕</button>
+    </div>
+    <img class="modal-img" src="assets/plc.jpg" alt="PLC Practice" onerror="this.style.display='none'">
+    <div class="modal-c">
+      <div><span class="k">Ringkas:</span> latihan ladder logic & safety (interlock, E-Stop).</div>
+    </div>
+  </dialog>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // nav active highlight
+    const navLinks = [...document.querySelectorAll(".links a")];
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+    const io = new IntersectionObserver((entries)=>{
+      const v = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!v) return;
+      navLinks.forEach(a => a.classList.remove("active"));
+      const active = navLinks.find(a => a.getAttribute("href") === "#" + v.target.id);
+      if(active) active.classList.add("active");
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: [0.08, 0.15, 0.25] });
+    sections.forEach(s => io.observe(s));
+
+    // modal open/close
+    document.querySelectorAll(".proj").forEach(card=>{
+      card.addEventListener("click", ()=>{
+        const id = card.getAttribute("data-modal");
+        const dlg = document.getElementById(id);
+        if(dlg) dlg.showModal();
+      });
+    });
+    document.querySelectorAll("dialog [data-close]").forEach(btn=>{
+      btn.addEventListener("click", (e)=>{
+        const dlg = e.target.closest("dialog");
+        dlg?.close();
+      });
+    });
+    document.querySelectorAll("dialog").forEach(dlg=>{
+      dlg.addEventListener("click", (e)=>{
+        const rect = dlg.getBoundingClientRect();
+        const inDialog = (
+          e.clientX >= rect.left && e.clientX <= rect.right &&
+          e.clientY >= rect.top  && e.clientY <= rect.bottom
+        );
+        if(!inDialog) dlg.close();
+      });
+      dlg.addEventListener("cancel", (e)=>{ e.preventDefault(); dlg.close(); });
+    });
+
+    // animated counters
+    const counters = [...document.querySelectorAll("[data-count]")];
+    const animate = (el, to)=>{
+      const dur = 900;
+      const start = performance.now();
+      const from = 0;
+      const step = (t)=>{
+        const p = Math.min(1, (t - start)/dur);
+        el.textContent = Math.floor(from + (to - from)*p).toString();
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    let counted = false;
+    const io2 = new IntersectionObserver((entries)=>{
+      if(counted) return;
+      if(entries.some(e=>e.isIntersecting)){
+        counted = true;
+        counters.forEach(el=> animate(el, parseInt(el.getAttribute("data-count"), 10) || 0));
+        io2.disconnect();
+      }
+    }, { threshold: 0.25 });
+    const hero = document.getElementById("profil");
+    if(hero) io2.observe(hero);
   </script>
 </body>
 </html>
