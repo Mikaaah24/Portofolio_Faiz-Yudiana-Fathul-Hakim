@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portofolio | Faiz Yudiana Fathul Hakim</title>
+  <style>
+    :root{
+      --bg:#0b1220; --card:#111a2e; --text:#e8eefc; --muted:#b9c3dd;
+      --accent:#6aa6ff; --line:rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(106,166,255,.18), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 20%, rgba(122,255,205,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1050px; margin:0 auto; padding:28px 18px 60px}
+    .nav{
+      display:flex; gap:16px; align-items:center; justify-content:space-between;
+      position:sticky; top:0; backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.55);
+      border-bottom:1px solid var(--line);
+      padding:14px 18px; z-index:10;
+    }
+    .brand{font-weight:700; letter-spacing:.2px}
+    .links{display:flex; gap:14px; flex-wrap:wrap}
+    .links a{color:var(--muted); font-size:14px}
+    .links a:hover{color:var(--text)}
+    .hero{padding:34px 0 22px; display:grid; grid-template-columns:1.2fr .8fr; gap:18px}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    h1{margin:0 0 8px; font-size:34px; line-height:1.1}
+    .subtitle{color:var(--muted); margin:0 0 16px; line-height:1.6}
+    .badges{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0}
+    .badge{
+      border:1px solid var(--line);
+      color:var(--muted);
+      padding:7px 10px; border-radius:999px; font-size:12px;
+      background: rgba(255,255,255,.02);
+    }
+    .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      border-radius:12px; padding:10px 12px; font-weight:600; font-size:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .btn.primary{
+      border-color: rgba(106,166,255,.55);
+      background: rgba(106,166,255,.14);
+    }
+    .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-top:16px}
+    .section{margin-top:26px}
+    .section h2{margin:0 0 10px; font-size:20px}
+    .muted{color:var(--muted)}
+    .proj{
+      display:flex; flex-direction:column; gap:10px;
+      padding:16px; border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .proj h3{margin:0; font-size:16px}
+    .proj p{margin:0; color:var(--muted); line-height:1.55; font-size:14px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      font-size:12px; padding:6px 8px; border-radius:999px;
+      border:1px solid var(--line); color:var(--muted);
+      background: rgba(255,255,255,.02);
+    }
+    .two{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    ul{margin:10px 0 0 18px; color:var(--muted); line-height:1.8}
+    .footer{margin-top:40px; color:var(--muted); font-size:13px; text-align:center}
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <div class="brand">Faiz Yudiana Fathul Hakim • Mekatronika</div>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="hero" id="home">
+      <div class="card">
+        <h1>Faiz Yudiana Fathul Hakim</h1>
+        <p class="subtitle">
+          Mechatronics & Artificial Intelligence Student (Semester 5)<br/>
+          Fokus: IoT, Embedded Systems, Sensor–Actuator Integration, dan Control
+        </p>
+
+        <p class="muted" style="margin:0">
+          Saya mengembangkan sistem mekatronika end-to-end: integrasi hardware–software, komunikasi HTTP/MQTT,
+          dan pengujian sistem. Pernah membangun sistem kontrol inkubator telur berbasis ESP32 dengan monitoring real-time
+          dan dashboard web.
+        </p>
+
+        <div class="btns">
+          <a class="btn primary" href="[LINK_CV_PDF]" target="_blank" rel="noreferrer">⬇️ Download CV</a>
+          <a class="btn" href="#projects">📌 Lihat Projects</a>
+          <a class="btn" href="https://github.com/Mikaaah24" target="_blank" rel="noreferrer">💻 GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/faiz-yudiana/" target="_blank" rel="noreferrer">🔗 LinkedIn</a>
+        </div>
+
+        <div class="badges">
+          <span class="badge">ESP32 / Arduino</span>
+          <span class="badge">MQTT / HTTP</span>
+          <span class="badge">Sensor–Actuator</span>
+          <span class="badge">PLC (Omron CX-Programmer)</span>
+          <span class="badge">Computer Vision (OpenCV)</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Highlight (Mekatronika)</h2>
+        <ul>
+          <li>Embedded & IoT: ESP32/Arduino, PWM, integrasi sensor/aktuator</li>
+          <li>Komunikasi: MQTT (basic), HTTP</li>
+          <li>Otomasi industri: ladder logic Omron, trainer pneumatic/hydraulic</li>
+          <li>Dokumentasi & system thinking: blok diagram, wiring, uji fungsi & keselamatan</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <h2>Projects (Selected)</h2>
+      <p class="muted">Bagian ini fokus ke mekatronika & embedded. Link demo/repo bisa kamu isi belakangan.</p>
+
+      <div class="grid">
+        <div class="proj">
+          <h3>Bank Energy (Off-grid Solar Charging Station) — PKM</h3>
+          <p>Rancang arsitektur sistem penyimpanan & distribusi energi off-grid untuk lampu dan charging outlet.</p>
+          <div class="chips">
+            <span class="chip">Solar Panel</span><span class="chip">MPPT</span><span class="chip">Lead-acid</span><span class="chip">Inverter</span>
+          </div>
+          <p class="muted">
+            Scope: wiring & integrasi komponen, pengecekan polaritas, serta uji fungsi dan keselamatan.
+          </p>
+          <p>
+            <a class="btn" href="[LINK_DEMO_BANK_ENERGY]" target="_blank" rel="noreferrer">📷 Foto/Video</a>
+            <a class="btn" href="[LINK_DOC_BANK_ENERGY]" target="_blank" rel="noreferrer">📄 Laporan</a>
+          </p>
+        </div>
+
+        <div class="proj">
+          <h3>Firefighting Line Follower Robot — CV & IoT</h3>
+          <p>Modul deteksi api berbasis kamera (OpenCV) + komunikasi MQTT ke robot line follower pemadam.</p>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">MQTT</span><span class="chip">ESP32</span><span class="chip">TCRT</span>
+          </div>
+          <p class="muted">
+            Scope: desain alur MQTT, logika kontrol robot, wiring awal & block diagram integrasi.
+          </p>
+          <p>
+            <a class="btn" href="[LINK_DEMO_FIREFIGHT]" target="_blank" rel="noreferrer">🎥 Demo</a>
+            <a class="btn" href="[LINK_GITHUB_FIREFIGHT]" target="_blank" rel="noreferrer">📁 Repo</a>
+          </p>
+        </div>
+
+        <div class="proj">
+          <h3>Industrial Automation Practice — Engineer Trainee</h3>
+          <p>Latihan otomasi industri: ladder logic, HMI, serta skenario kontrol pneumatic & hydraulic.</p>
+          <div class="chips">
+            <span class="chip">Omron CX-Programmer</span><span class="chip">Ladder</span><span class="chip">Pneumatic</span><span class="chip">Hydraulic</span>
+          </div>
+          <p class="muted">
+            Case: water tank control, automatic conveyor, simulasi lift 4 lantai, emergency stop, timed transitions.
+          </p>
+          <p>
+            <a class="btn" href="[LINK_DOC_PLC]" target="_blank" rel="noreferrer">📄 Dokumentasi</a>
+            <a class="btn" href="[LINK_VIDEO_PLC]" target="_blank" rel="noreferrer">🎥 Demo</a>
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:14px" class="card">
+        <h3 style="margin:0 0 8px">Project Lain (Opsional)</h3>
+        <p class="muted" style="margin:0">
+          Kamu juga punya experience Data/AI: analisis dataset BPJS 2022 + model regresi untuk prediksi time lag.
+          Ini bisa kamu taruh di section “AI Projects” kalau mau, tapi untuk portofolio mekatronika cukup jadi tambahan.
+        </p>
+        <div class="btns" style="margin-top:12px">
+          <a class="btn" href="[LINK_GITHUB_BPJS]" target="_blank" rel="noreferrer">📁 Repo BPJS (opsional)</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <h2>Skills</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Technical</h3>
+          <ul>
+            <li><b>Embedded & IoT:</b> ESP32, Arduino (UNO/Nano), sensor/actuator, PWM</li>
+            <li><b>Communication:</b> HTTP, MQTT (basic)</li>
+            <li><b>Automation & PLC:</b> Omron CX-Programmer, ladder logic (basic), relay control</li>
+            <li><b>Data Tools:</b> Python, Pandas, NumPy, Matplotlib</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Prototyping & Tools</h3>
+          <ul>
+            <li>Prototyping: breadboarding, soldering, Fritzing, Eagle PCB design</li>
+            <li>Simulasi/Desain: Proteus, Tinkercad, Autocad, SketchUp</li>
+            <li>Dev tools: VS Code, Git/GitHub</li>
+            <li>Dokumentasi: technical reporting (Word/Excel)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <h2>Education</h2>
+      <div class="card">
+        <p class="subtitle" style="margin:0">
+          Universitas Pendidikan Indonesia (UPI) — Purwakarta (Sep 2023 – Present)<br/>
+          Undergraduate Student in Mechatronics & Artificial Intelligence • GPA 3.54/4.00
+        </p>
+        <p class="muted" style="margin-top:10px">
+          Relevant coursework: Embedded Systems, Control Systems, PLC Programming, Electronics, IoT, Computer Vision, Machine Learning
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p class="subtitle" style="margin:0">
+          Phone/WA: <b>081221338165</b><br/>
+          Email: <b>yudianafathul@gmail.com</b><br/>
+          GitHub: <b>github.com/Mikaaah24</b><br/>
+          LinkedIn: <b>linkedin.com/in/faiz-yudiana</b>
+        </p>
+        <p class="muted" style="margin-top:10px">
+          Sertifikasi: Introduction to Cloud — Cognitive Class / IBM Developer Skills Network
+        </p>
+      </div>
+    </section>
+
+    <div class="footer">© <span id="year"></span> Faiz Yudiana Fathul Hakim • Built with simple HTML/CSS</div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
