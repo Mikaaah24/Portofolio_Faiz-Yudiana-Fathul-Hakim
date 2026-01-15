@@ -9,8 +9,6 @@
   <style>
     :root{
       --bg:#070A12;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.10);
       --line: rgba(255,255,255,.10);
       --text:#EEF2FF;
       --muted: rgba(238,242,255,.72);
@@ -100,7 +98,7 @@
     }
     .pad{ padding: 18px; position: relative; z-index: 1; }
 
-    /* HERO GRID */
+    /* HERO */
     .grid-hero{
       margin-top: 18px;
       display:grid;
@@ -132,6 +130,7 @@
 
     .btns{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
     .btn{
+      appearance:none;
       display:inline-flex; align-items:center; gap:8px;
       padding: 10px 12px;
       border-radius: 14px;
@@ -139,8 +138,11 @@
       background: rgba(255,255,255,.03);
       font-weight: 900;
       font-size: 13px;
+      color: var(--text);
+      cursor:pointer;
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
       user-select:none;
+      font-family: inherit;
     }
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(34,211,238,.28); }
     .btn.primary{
@@ -148,6 +150,7 @@
       background: linear-gradient(90deg, rgba(139,92,246,.18), rgba(34,211,238,.10));
     }
     .btn.primary:hover{ border-color: rgba(139,92,246,.85); }
+    .btn.small{ padding: 8px 10px; border-radius: 12px; font-size: 12px; }
 
     .badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
     .badge{
@@ -166,7 +169,6 @@
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
     }
-    .focus-head{ display:flex; justify-content:space-between; gap:10px; align-items:flex-end; }
     .focus-title{ font-weight:950; letter-spacing:-.3px; }
     .bar{
       margin-top:10px;
@@ -288,6 +290,15 @@
     }
 
     /* CERTS */
+    .cert-head{
+      display:flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .cert-head .sub{ color: var(--muted); font-size: 13px; line-height: 1.6; margin:0; }
+
     .certs{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -310,9 +321,45 @@
     .cert p{ margin:0; color: var(--muted); font-size: 13px; line-height:1.6; }
     .mini{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
 
+    /* CERT BUTTON STYLE (glow) */
+    .cert .btns{ margin-top: 12px; }
+    .btn.cert-btn{
+      border-color: rgba(34,211,238,.28);
+      background: linear-gradient(90deg, rgba(34,211,238,.14), rgba(139,92,246,.10));
+      position: relative;
+      overflow: hidden;
+    }
+    .btn.cert-btn::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(220px 120px at 10% 20%, rgba(34,211,238,.22), transparent 60%),
+        radial-gradient(220px 120px at 90% 40%, rgba(139,92,246,.18), transparent 60%);
+      opacity: .9;
+      pointer-events:none;
+    }
+    .btn.cert-btn span{ position: relative; z-index: 1; }
+    .btn.cert-btn:hover{
+      border-color: rgba(139,92,246,.45);
+      background: linear-gradient(90deg, rgba(34,211,238,.18), rgba(139,92,246,.14));
+    }
+
+    /* CONTACT clickable links */
+    .linkline{
+      color: rgba(238,242,255,.90);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(34,211,238,.35);
+      transition: .15s ease;
+    }
+    .linkline:hover{
+      border-bottom-color: rgba(139,92,246,.55);
+      color: rgba(238,242,255,1);
+    }
+
     /* MODAL */
     dialog{
-      width: min(780px, calc(100% - 24px));
+      width: min(820px, calc(100% - 24px));
       border: 1px solid rgba(255,255,255,.14);
       border-radius: 18px;
       background: rgba(7,10,18,.92);
@@ -371,6 +418,7 @@
       h1{ font-size: 30px; }
       .avatar{ width: 80px; height: 80px; }
       .fallback{ width: 80px; height: 80px; }
+      .cert-head{ flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -396,7 +444,7 @@
       <div class="card">
         <div class="pad">
           <div class="subtitle" style="margin:0; font-weight:900; letter-spacing:-.2px; color: rgba(238,242,255,.82);">
-            Looking for internship • Robotika / Embedded / Otomasi
+            Internship Focus • Robotika / Embedded / Otomasi
           </div>
 
           <div style="height:14px"></div>
@@ -410,7 +458,7 @@
               <h1>Faiz Yudiana<br/>Fathul Hakim</h1>
               <div class="subtitle">
                 Mechatronics & Artificial Intelligence • UPI (Semester 5)<br/>
-                Fokus: Embedded • IoT • Control • Automation
+                Embedded • IoT • Control • Automation
               </div>
             </div>
           </div>
@@ -418,9 +466,8 @@
           <div style="height:10px"></div>
 
           <p class="subtitle" style="margin:0;">
-            Saya mahasiswa semester 5 yang fokus mengembangkan sistem mekatronika end-to-end:
-            integrasi sensor–aktuator, komunikasi HTTP/MQTT, serta pengujian & dokumentasi sistem.
-            Saya pernah membangun sistem otomasi berbasis ESP32 dengan monitoring real-time dan dashboard web.
+            Saya fokus mengembangkan sistem mekatronika end-to-end: integrasi sensor–aktuator,
+            komunikasi HTTP/MQTT, serta pengujian & dokumentasi sistem.
           </p>
 
           <div class="btns">
@@ -439,9 +486,7 @@
           </div>
 
           <div class="focus">
-            <div class="focus-head">
-              <div class="focus-title">Fokus Portofolio</div>
-            </div>
+            <div class="focus-title">Fokus Portofolio</div>
             <div class="bar" title="Mekatronika 80% | AI 20%">
               <div class="seg mech">Mekatronika 80%</div>
               <div class="seg ai">AI 20%</div>
@@ -454,21 +499,21 @@
         <div class="pad">
           <h2 style="margin:0 0 10px;">Ringkasan</h2>
           <div class="subtitle" style="margin:0;">
-            IoT & Embedded Systems • Integrasi Sensor–Aktuator • Control Logic • Otomasi Industri (PLC)
+            IoT & Embedded Systems • Integrasi Sensor–Actuator • Control Logic • Otomasi Industri (PLC)
           </div>
 
           <div class="stats">
             <div class="stat">
               <div class="num" data-count="3">0</div>
-              <div class="lab">Featured projects</div>
+              <div class="lab">Projects</div>
             </div>
             <div class="stat">
               <div class="num" data-count="6">0</div>
-              <div class="lab">Kategori skill</div>
+              <div class="lab">Skill Categories</div>
             </div>
             <div class="stat">
-              <div class="num" data-count="1">0</div>
-              <div class="lab">Sertifikat</div>
+              <div class="num" data-count="3">0</div>
+              <div class="lab">Top Certificates</div>
             </div>
             <div class="stat">
               <div class="num" data-count="2026">0</div>
@@ -597,7 +642,6 @@
     <!-- PROYEK -->
     <section id="proyek" class="section">
       <h2>Proyek</h2>
-
       <div class="projects">
         <article class="proj" data-modal="m1">
           <img class="thumb" src="assets/bank-energy.jpg" alt="Bank Energy" onerror="this.style.display='none'">
@@ -636,13 +680,55 @@
 
     <!-- SERTIFIKAT -->
     <section id="sertifikat" class="section">
-      <h2>Sertifikat</h2>
+      <div class="cert-head">
+        <div>
+          <h2 style="margin:0 0 6px;">Sertifikat</h2>
+          <p class="sub">Beberapa sertifikat unggulan + akses ke folder sertifikat.</p>
+        </div>
+        <div class="btns" style="margin:0;">
+          <button class="btn primary" id="openCerts">📁 Lihat semua</button>
+          <a class="btn" href="https://drive.google.com/drive/folders/1g-nETxprT1FLM2Q3Kp_Rpfpqc9qPPd_f?usp=sharing"
+             target="_blank" rel="noreferrer">🔗 Drive</a>
+        </div>
+      </div>
+
       <div class="certs">
         <div class="cert">
-          <h3>Introduction to Cloud</h3>
+          <h3>Data Analysis with Python (DA0101EN)</h3>
           <p>Cognitive Class / IBM Developer Skills Network</p>
           <div class="mini">
-            <span class="tag">Cloud</span><span class="tag">IBM</span>
+            <span class="tag">Python</span><span class="tag">Data Analysis</span><span class="tag">IBM</span>
+          </div>
+          <div class="btns">
+            <a class="btn cert-btn"
+               href="https://courses.cognitiveclass.ai/certificates/2637c1af5e964129b5fba4668bb84f0e"
+               target="_blank" rel="noreferrer"><span>📄 Lihat Sertifikat</span></a>
+          </div>
+        </div>
+
+        <div class="cert">
+          <h3>Machine Learning with Python (ML0101EN)</h3>
+          <p>Cognitive Class / IBM Developer Skills Network</p>
+          <div class="mini">
+            <span class="tag">ML</span><span class="tag">Python</span><span class="tag">IBM</span>
+          </div>
+          <div class="btns">
+            <a class="btn cert-btn"
+               href="https://courses.cognitiveclass.ai/certificates/1d1ab7bf5568490ba7dabecbabc05c71"
+               target="_blank" rel="noreferrer"><span>📄 Lihat Sertifikat</span></a>
+          </div>
+        </div>
+
+        <div class="cert">
+          <h3>Python 101 for Data Science (PY0101EN)</h3>
+          <p>Cognitive Class / IBM Developer Skills Network</p>
+          <div class="mini">
+            <span class="tag">Python</span><span class="tag">Data Science</span><span class="tag">IBM</span>
+          </div>
+          <div class="btns">
+            <a class="btn cert-btn"
+               href="https://courses.cognitiveclass.ai/certificates/976a54fd23b7444a855e1cc53b0d956a"
+               target="_blank" rel="noreferrer"><span>📄 Lihat Sertifikat</span></a>
           </div>
         </div>
       </div>
@@ -661,21 +747,41 @@
       </div>
     </section>
 
-    <!-- KONTAK -->
+    <!-- KONTAK (SEMUA LINK AKTIF) -->
     <section id="kontak" class="section">
       <h2>Kontak</h2>
       <div class="card">
         <div class="pad">
           <div class="subtitle" style="margin:0; line-height:1.9;">
-            Phone/WA: <b>081221338165</b><br/>
-            Email: <b>yudianafathul@gmail.com</b><br/>
-            GitHub: <b>github.com/Mikaaah24</b><br/>
-            LinkedIn: <b>linkedin.com/in/faiz-yudiana</b>
+            <div>
+              Phone/WA:
+              <a href="tel:+6281221338165" class="linkline"><b>081221338165</b></a>
+              <span style="opacity:.7;">•</span>
+              <a href="https://wa.me/6281221338165" target="_blank" rel="noreferrer" class="linkline">Chat WhatsApp</a>
+            </div>
+
+            <div>
+              Email:
+              <a href="mailto:yudianafathul@gmail.com" class="linkline"><b>yudianafathul@gmail.com</b></a>
+            </div>
+
+            <div>
+              GitHub:
+              <a href="https://github.com/Mikaaah24" target="_blank" rel="noreferrer" class="linkline"><b>github.com/Mikaaah24</b></a>
+            </div>
+
+            <div>
+              LinkedIn:
+              <a href="https://www.linkedin.com/in/faiz-yudiana/" target="_blank" rel="noreferrer" class="linkline"><b>linkedin.com/in/faiz-yudiana</b></a>
+            </div>
           </div>
 
           <div class="btns">
             <a class="btn primary" href="mailto:yudianafathul@gmail.com">✉️ Email</a>
             <a class="btn" href="https://wa.me/6281221338165" target="_blank" rel="noreferrer">💬 WhatsApp</a>
+            <a class="btn" href="tel:+6281221338165">📞 Telepon</a>
+            <a class="btn" href="https://github.com/Mikaaah24" target="_blank" rel="noreferrer">💻 GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/faiz-yudiana/" target="_blank" rel="noreferrer">🔗 LinkedIn</a>
           </div>
         </div>
       </div>
@@ -686,7 +792,7 @@
     </footer>
   </main>
 
-  <!-- MODALS -->
+  <!-- PROJECT MODALS -->
   <dialog id="m1">
     <div class="modal-h">
       <h3>Bank Energy — Off-grid Solar Charging Station</h3>
@@ -720,7 +826,30 @@
     </div>
   </dialog>
 
+  <!-- CERT MODAL (EMBED DRIVE FOLDER) -->
+  <dialog id="certModal">
+    <div class="modal-h">
+      <h3>Sertifikat</h3>
+      <button class="x" data-close>✕</button>
+    </div>
+    <div class="modal-c">
+      <iframe
+        src="https://drive.google.com/embeddedfolderview?id=1g-nETxprT1FLM2Q3Kp_Rpfpqc9qPPd_f#list"
+        width="100%"
+        height="540"
+        style="border:1px solid rgba(255,255,255,.10); border-radius:14px; background: rgba(255,255,255,.02);"
+        loading="lazy">
+      </iframe>
+
+      <div class="btns" style="margin-top:12px">
+        <a class="btn" href="https://drive.google.com/drive/folders/1g-nETxprT1FLM2Q3Kp_Rpfpqc9qPPd_f?usp=sharing"
+           target="_blank" rel="noreferrer">🔗 Buka di Drive</a>
+      </div>
+    </div>
+  </dialog>
+
   <script>
+    // year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // nav active highlight
@@ -735,7 +864,7 @@
     }, { rootMargin: "-40% 0px -55% 0px", threshold: [0.08, 0.15, 0.25] });
     sections.forEach(s => io.observe(s));
 
-    // modal open/close
+    // project modals
     document.querySelectorAll(".proj").forEach(card=>{
       card.addEventListener("click", ()=>{
         const id = card.getAttribute("data-modal");
@@ -743,12 +872,16 @@
         if(dlg) dlg.showModal();
       });
     });
+
+    // close buttons
     document.querySelectorAll("dialog [data-close]").forEach(btn=>{
       btn.addEventListener("click", (e)=>{
         const dlg = e.target.closest("dialog");
         dlg?.close();
       });
     });
+
+    // click outside to close
     document.querySelectorAll("dialog").forEach(dlg=>{
       dlg.addEventListener("click", (e)=>{
         const rect = dlg.getBoundingClientRect();
@@ -760,6 +893,13 @@
       });
       dlg.addEventListener("cancel", (e)=>{ e.preventDefault(); dlg.close(); });
     });
+
+    // cert modal
+    const openCerts = document.getElementById("openCerts");
+    const certModal = document.getElementById("certModal");
+    if (openCerts && certModal) {
+      openCerts.addEventListener("click", () => certModal.showModal());
+    }
 
     // animated counters
     const counters = [...document.querySelectorAll("[data-count]")];
@@ -788,3 +928,4 @@
   </script>
 </body>
 </html>
+
